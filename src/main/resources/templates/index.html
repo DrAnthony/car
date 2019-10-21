@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>index</title>
+</head>
+<style>
+    *{
+        padding:0;
+        margin:0;
+    }
+    body{
+        background: url("../images/back.jpg") no-repeat fixed;
+        background-size: 100% 100%;
+    }
+  
+    .head{
+        width:100%;
+        height:750px;
+        background-color: #666;
+        opacity: 0.4;
+    }
+    a{
+        text-decoration:none;
+        color:black;
+    }
+    .head-button{
+        position: absolute;
+        top:350px;
+        left:45%;
+        width:150px;
+        height:50px;
+        font-size: 22px;
+        border-radius: 10px;
+        
+    }
+    .title{
+      position: absolute;
+      top:200px;
+      left:36%;
+      font-size:70px;
+      font-family:'KaiTi';
+      text-align:center;
+      color:white;
+     
+    }
+    .picture-know{
+        width:100%;
+        height:1150px;
+        background-color: #FFFAFA;
+      
+    }
+    
+    .introduce>p{
+        padding-top:30px;
+        text-align: center;
+        font-size:30px;
+    }
+    #middle-know{
+        width:100%;
+        margin:0 auto;
+        height:750px;
+        background-color:gainsboro;
+    }
+    #file_input{
+        width:300px;
+        height:50px;
+        margin:40px 0;
+        margin-left:160px;
+        font-size: 20px;
+        
+    }
+    .result1{
+        width:1200px;
+        margin:0 auto;
+    }
+    #result{
+        float:left;
+        width:500px;
+        height:500px;
+        border:1px solid #333;
+        background-color: #FFFAFA;
+    }
+    #result2{
+        float:right;
+        width:500px;
+        height:500px; 
+        border:1px solid #333;
+        background-color: #FFFAFA;
+    }
+    #word{
+        font-size: 18px;
+        margin:0 40px;
+        text-indent: 2em;
+        line-height: 35px;
+        text-align: left;
+        padding-bottom:20px;
+    }
+    footer{
+   
+    width:100%;
+    height:158px;
+    background-color: #303030;
+    padding-top:60px;
+}
+footer>p{
+    color:#fff;
+    font-size:16px;
+    text-align:center;
+    margin:10px;
+}
+</style>
+<body>
+    <main>
+    <div class="head">   
+    </div>
+    <p class="title">车牌识别系统</p>
+    <button class="head-button"> <a href="#middle-know">车牌识别</a></button>
+    <div class="picture-know">
+               <div class="introduce">
+                   <p>车牌识别系统<br><p id="word">   我们小组是由王迪、杨瑞华、周莹、浦欣荷、黄玲组成的，我们组做的车牌识别系统是一个可以通过车子的车牌来转换为车牌号的一个系统。车牌识别系统(Vehicle License Plate Recognition，VLPR) 是计算机视频图像识别技术在车辆牌照识别中的一种应用。车牌识别在高速公路车辆管理中得到广泛应用，电子收费（ETC）系统中，也是结合DSRC技术识别车辆身份的主要手段。
+                        车牌识别技术要求能够将运动中的汽车牌照从复杂背景中提取并识别出来，通过车牌提取、图像预处理、特征提取、车牌字符识别等技术，识别车辆牌号、颜色等信息，目前最新的技术水平为字母和数字的识别率可达到99.7%，汉字的识别率可达到99%。
+                        在停车场管理中，车牌识别技术也是识别车辆身份的主要手段。在深圳市公安局建设的《停车库（场）车辆图像和号牌信息采集与传输系统技术要求》中，车牌识别技术成为车辆身份识别的主要手段。
+                        车牌识别技术结合电子不停车收费系统（ETC）识别车辆，过往车辆通过道口时无须停车，即能够实现车辆身份自动识别、自动收费。在车场管理中，为提高出入口车辆通行效率，车牌识别针对无需收停车费的车辆（如月卡车、内部免费通行车辆），建设无人值守的快速通道，免取卡、不停车的出入体验，正改变出入停车场的管理模式。</p></p>
+                   
+               </div>
+                <div id="middle-know">
+                    <input type="file" id="file" />
+                    <div class="result1">
+                    <div id="result"></div> 
+                    <div id="result2"></div> 
+                </div>
+                 </div>
+                 <footer>
+                        <p>联系方式 武汉理工大学升升公寓 邮编：332200 </p>
+                        <p>传真：33333333 邮箱:11111@qq.com 小组成员： 王迪、杨瑞华、周莹、黄玲、浦欣荷 </p>
+                        <p>京公网安备222225532号 京ICP备112222262-12号</p>
+                </footer>
+        </div>
+</main>
+</body>
+<script>
+        var result = document.getElementById("result");
+        var input = document.getElementById("file_input");
+        if (typeof FileReader === 'undefined') {
+    
+            result.innerHTML = "抱歉，你的浏览器不支持 FileReader";
+            input.setAttribute('disabled', 'disabled');
+        }
+        else {
+            input.addEventListener('change', readFile, false);
+        }
+        function readFile() {
+            var file = this.files[0];
+            if (!/image\/\w+/.test(file.type)) {
+                alert("文件必须为图片！");
+                return false;
+            }
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function (e) {
+                result.innerHTML = '<img src="' + this.result + '" alt="" width="500px" height="500px"/>'
+            }
+        }
+    
+    
+    
+    </script>
+    
+</html>
