@@ -32,11 +32,14 @@ public class MainService {
             responseEntity = new ResponseEntity(0, "系统错误，文件上传失败");
         }
         String lpn;
+        //若要测试前端与服务器交互，请将此if-else块替换为注释部分
         if((lpn=PythonThread.getInstance().send(UPLOAD_PATH+fileName)).equals("false")){
             responseEntity=new ResponseEntity(0,"识别错误");
         }else {
             responseEntity = new ResponseEntity(1, lpn, fileName);
         }
+        //前端服务器交互测试
+        //responseEntity = new ResponseEntity(1, "测试", fileName);
         return responseEntity;
     }
 
